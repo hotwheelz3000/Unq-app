@@ -7,3 +7,4 @@ product: Unq
 # app's version (change it by hand for a new version); the Build IPA workflow
 # sets CFBundleVersion to the build number automatically.
 infoPath: Unq-Info.plist
+iconPath: Resources/AppIcon.png
