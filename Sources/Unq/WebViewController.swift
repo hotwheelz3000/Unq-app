@@ -56,9 +56,13 @@ final class WebViewController: UIViewController {
         config.image = UIImage(systemName: "doc.on.clipboard")
         config.imagePadding = 6
         config.cornerStyle = .capsule
-        // Gold to match unqforge's Build button, with dark text.
-        config.baseBackgroundColor = UIColor(red: 0xD9 / 255.0, green: 0xA8 / 255.0, blue: 0x4A / 255.0, alpha: 1)
-        config.baseForegroundColor = UIColor(red: 0x1A / 255.0, green: 0x18 / 255.0, blue: 0x15 / 255.0, alpha: 1)
+        // unqforge logo palette: charcoal button, cream text and outline.
+        let charcoal = UIColor(red: 0x1E / 255.0, green: 0x1D / 255.0, blue: 0x19 / 255.0, alpha: 1)
+        let cream = UIColor(red: 0xE9 / 255.0, green: 0xE3 / 255.0, blue: 0xD5 / 255.0, alpha: 1)
+        config.baseBackgroundColor = charcoal
+        config.baseForegroundColor = cream
+        config.background.strokeColor = cream
+        config.background.strokeWidth = 1
         pasteButton.configuration = config
         pasteButton.accessibilityHint = L10n.pasteHint
         pasteButton.layer.shadowColor = UIColor.black.cgColor
