@@ -163,6 +163,11 @@ extension WebViewController: WKNavigationDelegate {
         }
         let url = navigationAction.request.url
         let scheme = url?.scheme?.lowercased() ?? ""
+        // A .shortcut file stays in the app (it's downloaded below), whatever host serves it.
+        if url?.pathExtension.lowercased() == "shortcut" {
+            decisionHandler(.allow)
+            return
+        }
         // Links that leave the site in the main frame open in Safari (or their app).
         if navigationAction.targetFrame?.isMainFrame ?? true,
            navigationAction.navigationType == .linkActivated,
