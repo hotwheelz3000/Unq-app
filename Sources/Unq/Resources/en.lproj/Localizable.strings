@@ -1,0 +1,9 @@
+/* Text shown in the app. Add a line here, build, and use it as L10n.<camelCaseKey>. */
+"paste_button" = "Paste";
+"paste_hint" = "Replaces the code in the editor with what you copied.";
+"pasted" = "Pasted";
+"clipboard_empty" = "Nothing copied";
+"editor_not_found" = "Couldn't find the editor";
+"download_failed" = "Download failed";
+"ok" = "OK";
+"cancel" = "Cancel";
