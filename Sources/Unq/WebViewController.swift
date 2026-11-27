@@ -37,10 +37,6 @@ final class WebViewController: UIViewController {
         webView.underPageBackgroundColor = Self.charcoal
         webView.translatesAutoresizingMaskIntoConstraints = false
 
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(reloadPage(_:)), for: .valueChanged)
-        webView.scrollView.refreshControl = refresh
-
         view.addSubview(webView)
         setUpPasteButton()
         setUpToast()
@@ -63,7 +59,13 @@ final class WebViewController: UIViewController {
         config.image = UIImage(systemName: "doc.on.clipboard")
         config.imagePadding = 4
         config.buttonSize = .small
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 11, weight: .semibold)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 12)
+        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrs in
+            var out = attrs
+            out.font = .systemFont(ofSize: 13, weight: .semibold)
+            return out
+        }
         config.cornerStyle = .capsule
         // unqforge logo palette: charcoal button, cream text and outline.
         config.baseBackgroundColor = Self.charcoal
@@ -133,17 +135,6 @@ final class WebViewController: UIViewController {
         UIAccessibility.post(notification: .announcement, argument: message)
         UIView.animate(withDuration: 0.2) { self.toast.alpha = 1 }
         UIView.animate(withDuration: 0.3, delay: 1.6, options: []) { self.toast.alpha = 0 }
-    }
-
-    // MARK: Reload
-
-    @objc private func reloadPage(_ sender: UIRefreshControl) {
-        if webView.url == nil {
-            webView.load(URLRequest(url: Self.homeURL))
-        } else {
-            webView.reload()
-        }
-        sender.endRefreshing()
     }
 
     // MARK: Opening downloaded files
