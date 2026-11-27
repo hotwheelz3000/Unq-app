@@ -7,6 +7,10 @@ import UIKit
 final class WebViewController: UIViewController {
     static let homeURL = URL(string: "https://unqx.site/sclib/") ?? URL(filePath: "/")
 
+    // unqforge palette (from the site's wordmark).
+    static let charcoal = UIColor(red: 0x1E / 255.0, green: 0x1D / 255.0, blue: 0x19 / 255.0, alpha: 1)
+    static let cream = UIColor(red: 0xE9 / 255.0, green: 0xE3 / 255.0, blue: 0xD5 / 255.0, alpha: 1)
+
     private var webView: WKWebView!
     private let pasteButton = UIButton(type: .system)
     private let toast = UILabel()
@@ -14,7 +18,8 @@ final class WebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        // Charcoal, not black, so no dark strip shows below or above the page.
+        view.backgroundColor = Self.charcoal
 
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
@@ -27,7 +32,9 @@ final class WebViewController: UIViewController {
         webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = false
-        webView.backgroundColor = .black
+        webView.backgroundColor = Self.charcoal
+        webView.scrollView.backgroundColor = Self.charcoal
+        webView.underPageBackgroundColor = Self.charcoal
         webView.translatesAutoresizingMaskIntoConstraints = false
 
         let refresh = UIRefreshControl()
@@ -54,14 +61,14 @@ final class WebViewController: UIViewController {
         var config = UIButton.Configuration.filled()
         config.title = L10n.pasteButton
         config.image = UIImage(systemName: "doc.on.clipboard")
-        config.imagePadding = 6
+        config.imagePadding = 4
+        config.buttonSize = .small
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 12, weight: .semibold)
         config.cornerStyle = .capsule
         // unqforge logo palette: charcoal button, cream text and outline.
-        let charcoal = UIColor(red: 0x1E / 255.0, green: 0x1D / 255.0, blue: 0x19 / 255.0, alpha: 1)
-        let cream = UIColor(red: 0xE9 / 255.0, green: 0xE3 / 255.0, blue: 0xD5 / 255.0, alpha: 1)
-        config.baseBackgroundColor = charcoal
-        config.baseForegroundColor = cream
-        config.background.strokeColor = cream
+        config.baseBackgroundColor = Self.charcoal
+        config.baseForegroundColor = Self.cream
+        config.background.strokeColor = Self.cream
         config.background.strokeWidth = 1
         pasteButton.configuration = config
         pasteButton.accessibilityHint = L10n.pasteHint
