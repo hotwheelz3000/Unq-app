@@ -35,6 +35,8 @@ final class WebViewController: UIViewController {
         webView.backgroundColor = Self.charcoal
         webView.scrollView.backgroundColor = Self.charcoal
         webView.underPageBackgroundColor = Self.charcoal
+        // No pull-down stretch at the top (or bottom) of the page.
+        webView.scrollView.bounces = false
         webView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(webView)
@@ -59,11 +61,11 @@ final class WebViewController: UIViewController {
         config.image = UIImage(systemName: "doc.on.clipboard")
         config.imagePadding = 4
         config.buttonSize = .small
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 11, weight: .semibold)
-        config.contentInsets = NSDirectionalEdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 12)
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 13, weight: .semibold)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 14)
         config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrs in
             var out = attrs
-            out.font = .systemFont(ofSize: 13, weight: .semibold)
+            out.font = .systemFont(ofSize: 15, weight: .semibold)
             return out
         }
         config.cornerStyle = .capsule
